@@ -1,0 +1,6 @@
+node_modules
+
+prisma
+
+src/config/*.env
+!src/config/sample.env
