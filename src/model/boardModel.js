@@ -17,6 +17,10 @@ class BoardModel extends BaseModel {
         return await this.db.raw(`SELECT * FROM ${this.boardTable} WHERE 1 LIMIT ${first}, ${last}`);
     }
 
+    async addBbsCnt(bo_table, count = 1) {
+        return await this.db.raw(`UPDATE ${this.boardTable} SET bo_count_write = bo_count_write + ${count} WHERE bo_table = '${bo_table}'`);
+    }
+
 }
 
 module.exports = BoardModel;

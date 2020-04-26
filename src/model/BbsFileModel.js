@@ -6,8 +6,7 @@ class BbsFileModel extends BaseModel {
         super();
     }
 
-    async getBbsFiles(params) {
-        const { bo_table, wr_id } = params;
+    async getBbsFiles(bo_table, wr_id) {
         return this.db.g5_board_file.findMany({
             where: { bo_table, wr_id }
         });

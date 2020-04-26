@@ -16,6 +16,10 @@ class BoardService extends BaseService {
         });
     }
 
+    static async getBoard(bo_table) {
+        return await board_m.getBoard(bo_table);
+    }
+
 }
 
 module.exports = BoardService;

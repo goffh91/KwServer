@@ -32,8 +32,9 @@ class BoardController extends BaseController {
      *       description: 페이지
      */
     static async getBoardList(req, res, next) {
-        const page = req.params.page || 1;
         try {
+            const page = req.params.page || 1;
+
             const boardList = await BoardService.getBoardList(page);
             res.json(boardList);
         }
