@@ -2,7 +2,6 @@ const BaseModel = require('./BaseModel');
 const { BBS_PREFIX } = require('../config/constant');
 
 class BbsModel extends BaseModel {
-
     constructor() {
         super();
     }
@@ -10,14 +9,14 @@ class BbsModel extends BaseModel {
     async getBbsList(bo_table, params) {
         const { first, last, where } = params;
         return await this.db[BBS_PREFIX + bo_table].findMany({
-            first, last, where
+            first,
+            last,
+            where,
         });
     }
 
     async getBbs(bo_table, wr_id) {
-        return await this.db[BBS_PREFIX + bo_table].findMany({
-            where: { wr_id }
-        });
+        return await this.db[BBS_PREFIX + bo_table].findOne({ wr_id });
     }
 
     async getNextNumber(bo_table) {
@@ -40,13 +39,14 @@ class BbsModel extends BaseModel {
             setOption.push(`${key} = '${value}'`);
         }
         let setString = setOption.join(',');
-        return await this.db.raw(`UPDATE ${BBS_PREFIX}${bo_table} SET ${setString} WHERE wr_id = '${wr_id}'`);
+        return await this.db.raw(
+            `UPDATE ${BBS_PREFIX}${bo_table} SET ${setString} WHERE wr_id = '${wr_id}'`,
+        );
     }
 
     async deleteBbs(bo_table, wr_id) {
         return await this.db.raw(`DELETE FROM ${BBS_PREFIX}${bo_table} WHERE wr_id = '${wr_id}'`);
     }
-
 }
 
 module.exports = BbsModel;

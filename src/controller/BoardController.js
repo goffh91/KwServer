@@ -1,5 +1,5 @@
-const BaseController = require('./baseController');
-const BoardService = require('../service/boardService');
+const BaseController = require('./BaseController');
+const BoardService = require('../service/BoardService');
 
 /**
  * @swagger
@@ -14,7 +14,6 @@ const BoardService = require('../service/boardService');
  *       description: 게시판 명
  */
 class BoardController extends BaseController {
-
     constructor() {
         super();
     }
@@ -37,12 +36,10 @@ class BoardController extends BaseController {
 
             const boardList = await BoardService.getBoardList(page);
             res.json(boardList);
-        }
-        catch (error) {
+        } catch (error) {
             next(error);
         }
     }
-
 }
 
 module.exports = BoardController;

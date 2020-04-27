@@ -1,10 +1,6 @@
-const Container = require('typedi').Container;
-
 class BaseController {
-
     constructor() {
-        this.container = Container;
-        this.isDevMode = (process.env.NODE_ENV === 'development');
+        this.isDevMode = process.env.NODE_ENV === 'development';
     }
 
     static next(req, res, next) {
@@ -18,9 +14,8 @@ class BaseController {
             } else {
                 next();
             }
-        }
+        };
     }
-
 }
 
 module.exports = BaseController;
