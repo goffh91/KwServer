@@ -16,11 +16,13 @@ class BbsModel extends BaseModel {
     }
 
     async getBbs(bo_table, wr_id) {
-        return await this.db[BBS_PREFIX + bo_table].findOne({ wr_id });
+        return await this.db[BBS_PREFIX + bo_table].findOne({
+            where: { wr_id }
+        });
     }
 
     async getNextNumber(bo_table) {
-        return await this.db.raw(`SELET MIN(wr_num) AS wr_num FROM ${BBS_PREFIX}${bo_table}`);
+        return await this.db.raw(`SELECT MIN(wr_num) AS wr_num FROM ${BBS_PREFIX}${bo_table}`);
     }
 
     async createBbs(bo_table, params) {
@@ -30,7 +32,7 @@ class BbsModel extends BaseModel {
         }
         let setString = setOption.join(',');
         await this.db.raw(`INSERT INTO ${BBS_PREFIX}${bo_table} SET ${setString}`);
-        return this.db.raw(`SELECT LAST_INSERT_ID()`);
+        return this.db.raw(`SELECT LAST_INSERT_ID() AS wr_id`);
     }
 
     async updateBbs(bo_table, wr_id, params) {

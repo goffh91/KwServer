@@ -11,10 +11,6 @@ const { DATETIME_FORMAT } = require('../config/constant');
  *   required:
  *     - bo_table
  *     - wr_id
- *     - wr_subject
- *     - wr_content
- *     - mb_id
- *     - wr_name
  *   properties:
  *     bo_table:
  *       type: string
@@ -147,8 +143,12 @@ class BbsController extends BaseController {
                 wr_link2,
                 bf_file,
                 captcha_key,
-            } = req.body;
-            const wr_name = req.user.mb_nick ? req.user.mb_nick : user_name;
+            } = req.query;
+
+            let wr_name;
+            if (req.user && req.user.mb_nick) wr_name = req.user.mb_nick;
+            else wr_name = user_name;
+
             const now = moment().format(DATETIME_FORMAT);
             const params = {
                 wr_name,
@@ -160,8 +160,8 @@ class BbsController extends BaseController {
                 wr_link1,
                 wr_link2,
                 wr_ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
-                wr_datetime: now,
-                wr_last: now,
+                wr_datetime: new Date(now),
+                wr_last: new Date(now),
             };
 
             const result = await BbsService.createBbs(bo_table, params);

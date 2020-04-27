@@ -5,7 +5,7 @@ const BoardController = require('../controller/boardController');
 const router = express.Router();
 
 router.get('/', asyncHandler(BoardController.getBoardList));
-router.get('/:page', asyncHandler(BoardController.getBoardList));
+router.get('/:bo_table', asyncHandler(BoardController.getBoard));
 
 
 module.exports = (router);

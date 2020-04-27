@@ -9,10 +9,12 @@ class AuthController extends BaseController {
     static async login(req, res, next) {
         try {
             const { } = req.params;
-            const user = await UserService.getUserById()
+            const user = await UserService.getUserById();
         } catch (error) {
             next(error);
         }
     }
 
 }
+
+module.exports = AuthController;
