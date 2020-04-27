@@ -3,8 +3,9 @@ const createError = require('http-errors');
 const express = require('express');
 const app = express();
 
-/** express config */
+/** config */
 require('./config/dotenv');
+require('./middleware/cronjob');
 require('./middleware/express')(app);
 
 /** routers */
